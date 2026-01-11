@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Queue - AI-Powered App Development Pipeline</title>
+    <meta name="description" content="Transform your app ideas into working applications with Claude Code. Automated planning, implementation, and deployment pipeline.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0b;
+            --bg-card: #18181b;
+            --bg-elevated: #27272a;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-purple: #a855f7;
+            --accent-blue: #3b82f6;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --accent-orange: #f97316;
+            --border-color: #27272a;
+            --glow-purple: rgba(168, 85, 247, 0.2);
+            --glow-blue: rgba(59, 130, 246, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        .logo span {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: white;
+            box-shadow: 0 4px 14px var(--glow-purple);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--glow-purple);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-card);
+            border-color: var(--accent-purple);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--glow-purple) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        h1 {
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 .gradient {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Hero Image */
+        .hero-image {
+            max-width: 1100px;
+            margin: 60px auto 0;
+            padding: 0 24px;
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+        
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 17px;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--accent-purple), transparent, var(--accent-blue));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 12px;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, transparent, var(--bg-card), transparent);
+        }
+        
+        .steps {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+        
+        .step {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        /* Screenshots Section */
+        .screenshots {
+            padding: 100px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 32px;
+        }
+        
+        .screenshot-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .screenshot-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .screenshot-card img {
+            width: 100%;
+            display: block;
+        }
+        
+        .screenshot-card .caption {
+            padding: 20px;
+        }
+        
+        .screenshot-card .caption h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .screenshot-card .caption p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 100px 24px;
+            text-align: center;
+        }
+        
+        .pricing-card {
+            max-width: 450px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 2px solid var(--accent-purple);
+            border-radius: 24px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+        }
+        
+        .price {
+            font-size: 64px;
+            font-weight: 800;
+            margin: 24px 0;
+        }
+        
+        .price span {
+            font-size: 20px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin: 32px 0;
+        }
+        
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 24px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--glow-blue) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        footer p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--accent-purple);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .step {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🚀</span>
+                <span>App Queue</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="https://gumroad.com/l/app-queue" class="btn btn-primary">Get App Queue</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Now available for developers
+            </div>
+            <h1>Turn App Ideas into<br><span class="gradient">Working Applications</span></h1>
+            <p class="hero-description">
+                App Queue is an AI-powered development pipeline that transforms your markdown app ideas 
+                into fully implemented applications using Claude Code. Automated planning, implementation, 
+                and deployment—all hands-free.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://gumroad.com/l/app-queue" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Download Now — $29
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary">
+                    See How It Works
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="images/dashboard.png" alt="App Queue Dashboard showing apps being processed">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Everything You Need to Ship Faster</h2>
+            <p>App Queue handles the entire development pipeline so you can focus on what matters—your ideas.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Markdown to App</h3>
+                <p>Write your app idea as a simple markdown file. App Queue handles the rest—parsing requirements, planning architecture, and implementing features.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Autonomous Mode</h3>
+                <p>Enable autonomous mode and watch your ideas become reality. Planning and implementation run automatically without any manual intervention.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Real-time Dashboard</h3>
+                <p>Beautiful web dashboard shows your entire pipeline. Track progress, view plans, launch apps, and manage your queue with ease.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Claude Code Integration</h3>
+                <p>Powered by Claude Code for intelligent planning and implementation. Your apps are built with modern best practices and clean code.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>GitHub Sync</h3>
+                <p>Automatically sync with your GitHub repository. Push completed apps to branches and track everything in version control.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Customizable Prompts</h3>
+                <p>Fine-tune the planning and implementation prompts to match your coding style and project requirements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>From idea to working app in four simple steps</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Write Your Idea</h3>
+                    <p>Create a markdown file describing your app. Include features, tech stack preferences, and any specific requirements. Drop it in the ideas folder.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Automatic Planning</h3>
+                    <p>App Queue uses Claude to analyze your idea and create a comprehensive implementation plan—system architecture, file structure, dependencies, and step-by-step tasks.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>AI Implementation</h3>
+                    <p>Claude Code takes the plan and builds your entire application autonomously. All files, components, styling, and functionality—created automatically.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Launch & Iterate</h3>
+                    <p>Your app is ready! Launch it directly from the dashboard, push to GitHub, or continue iterating. Rinse and repeat for your next idea.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="screenshots">
+        <div class="section-header">
+            <h2>See It In Action</h2>
+            <p>From installation to running apps in minutes</p>
+        </div>
+        <div class="screenshot-grid">
+            <div class="screenshot-card">
+                <img src="images/installation.png" alt="Installation complete screen">
+                <div class="caption">
+                    <h4>Quick Installation</h4>
+                    <p>One command installs everything. Ready in seconds.</p>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <img src="images/running.png" alt="App Queue running">
+                <div class="caption">
+                    <h4>Background Services</h4>
+                    <p>Sync and watch services run automatically.</p>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <img src="images/closeup.png" alt="App cards showing progress">
+                <div class="caption">
+                    <h4>Live Progress Tracking</h4>
+                    <p>Watch planning and implementation in real-time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <h2>Simple Pricing</h2>
+            <p>One-time purchase. Lifetime updates.</p>
+        </div>
+        <div class="pricing-card">
+            <h3>App Queue</h3>
+            <div class="price">$29 <span>one-time</span></div>
+            <ul class="pricing-features">
+                <li>Full source code access</li>
+                <li>Autonomous mode</li>
+                <li>Real-time dashboard</li>
+                <li>GitHub integration</li>
+                <li>Customizable prompts</li>
+                <li>Lifetime updates</li>
+                <li>No subscription required</li>
+            </ul>
+            <a href="https://gumroad.com/l/app-queue" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                Get App Queue Now
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Ship Faster?</h2>
+            <p>Stop manually building every app. Let AI handle the heavy lifting while you focus on the ideas that matter.</p>
+            <a href="https://gumroad.com/l/app-queue" class="btn btn-primary">
+                Get App Queue — $29
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 App Queue. Built for developers who ship.</p>
+    </footer>
+</body>
+</html>
