@@ -1,0 +1,361 @@
+/* CSS Custom Properties */
+:root {
+    /* Colors */
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --success-hover: #1e7e34;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --background-color: #f8f9fa;
+    --surface-color: #ffffff;
+    --text-primary: #343a40;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+
+    /* Border radius */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px var(--shadow-color);
+    --shadow-md: 0 4px 6px var(--shadow-color);
+    --shadow-lg: 0 10px 15px var(--shadow-color);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease-out;
+    --transition-medium: 0.3s ease-out;
+    --transition-slow: 0.5s ease-out;
+}
+
+/* Base Styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-md);
+}
+
+/* App Container */
+.app-container {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xxl);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Header */
+.app-header {
+    margin-bottom: var(--spacing-xxl);
+}
+
+.app-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Counter Section */
+.counter-section {
+    margin-bottom: var(--spacing-xxl);
+}
+
+/* Counter Display */
+.counter-display {
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    transition: border-color var(--transition-medium);
+}
+
+.counter-display:focus-within {
+    border-color: var(--primary-color);
+}
+
+.counter-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+    min-height: 1.2em;
+    transition: color var(--transition-medium), transform var(--transition-fast);
+}
+
+.counter-value.updating {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Counter Buttons */
+.counter-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-width: 60px;
+    min-height: 48px;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.counter-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: all var(--transition-medium);
+    transform: translate(-50%, -50%);
+}
+
+.counter-btn:active::before {
+    width: 100px;
+    height: 100px;
+}
+
+.counter-btn:focus-visible {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Increment Button */
+.increment-btn {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.increment-btn:hover:not(:disabled) {
+    background-color: var(--success-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Decrement Button */
+.decrement-btn {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.decrement-btn:hover:not(:disabled) {
+    background-color: var(--danger-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Reset Button */
+.reset-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    min-width: 80px;
+}
+
+.reset-btn:hover:not(:disabled) {
+    background-color: #545b62;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Disabled State */
+.counter-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Footer */
+.app-footer {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.app-footer p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app-container {
+        padding: var(--spacing-xl);
+        margin: var(--spacing-sm);
+    }
+
+    .app-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .counter-value {
+        font-size: 2.5rem;
+    }
+
+    .button-group {
+        gap: var(--spacing-sm);
+    }
+
+    .counter-btn {
+        min-width: 50px;
+        min-height: 44px;
+        font-size: 1.1rem;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .app-container {
+        padding: var(--spacing-lg);
+    }
+
+    .app-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .counter-value {
+        font-size: 2rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .counter-btn {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .app-footer p {
+        font-size: 0.8rem;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --shadow-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .counter-display {
+        border-width: 3px;
+    }
+
+    .counter-btn {
+        border-width: 3px;
+        border-color: currentColor;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1a1a;
+        --surface-color: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #b3b3b3;
+        --border-color: #404040;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .counter-display {
+        background-color: #1a1a1a;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .app-container {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+
+    .counter-btn {
+        border: 1px solid #000 !important;
+    }
+
+    .app-footer {
+        display: none;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Utility Classes */
+.pulse {
+    animation: pulse var(--transition-medium) ease-out;
+}
+
+.shake {
+    animation: shake 0.5s ease-out;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

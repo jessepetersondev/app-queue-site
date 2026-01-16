@@ -1,0 +1,31 @@
+You are an expert software architect. Create a comprehensive implementation plan.
+
+CRITICAL:
+1. Read the app idea/user story carefully
+2. Analyze the existing project structure
+3. Understand the tech stack from package.json
+4. CREATE a detailed, actionable implementation plan
+
+Create IMPLEMENTATION_PLAN.md containing:
+- Executive summary
+- Requirements analysis
+- System architecture
+- Data design
+- API design
+- UI/UX design
+- Implementation phases
+- File-by-file guide
+
+BEGIN PLANNING NOW. Create IMPLEMENTATION_PLAN.md with the complete plan.
+
+APP IDEA:
+# Counter App 5567
+
+A simple counter app with increment and decrement buttons.
+
+## Features
+- Display a number starting at 0
+- Plus button to increment
+- Minus button to decrement
+- Reset button to go back to 0
+

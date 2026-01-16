@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Counter App 5567 - A simple, responsive counter application">
+    <title>Counter App 5567</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <main class="app-container">
+        <header class="app-header">
+            <h1>Counter App 5567</h1>
+        </header>
+
+        <section class="counter-section" aria-label="Counter controls">
+            <div class="counter-display" role="status" aria-live="polite" aria-label="Current counter value">
+                <span id="counter-value" class="counter-value">0</span>
+            </div>
+
+            <div class="button-group" role="group" aria-label="Counter controls">
+                <button
+                    id="decrement-btn"
+                    class="counter-btn decrement-btn"
+                    type="button"
+                    aria-label="Decrease counter by 1"
+                    title="Decrease counter"
+                >
+                    <span aria-hidden="true">-</span>
+                </button>
+
+                <button
+                    id="increment-btn"
+                    class="counter-btn increment-btn"
+                    type="button"
+                    aria-label="Increase counter by 1"
+                    title="Increase counter"
+                >
+                    <span aria-hidden="true">+</span>
+                </button>
+
+                <button
+                    id="reset-btn"
+                    class="counter-btn reset-btn"
+                    type="button"
+                    aria-label="Reset counter to zero"
+                    title="Reset counter"
+                >
+                    Reset
+                </button>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <p>Use keyboard navigation: Tab to navigate, Enter or Space to activate buttons</p>
+        </footer>
+    </main>
+
+    <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

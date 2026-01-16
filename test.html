@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App Test</title>
+</head>
+<body>
+    <script type="module">
+        // Test the counter module
+        import Counter from './assets/js/counter.js';
+        import { storage } from './assets/js/storage.js';
+
+        console.log('Testing Counter App 5567 modules...');
+
+        // Test storage
+        const testResult = storage.save('test', 'hello world');
+        const loadedValue = storage.load('test', 'default');
+        console.log('Storage test:', testResult ? 'PASS' : 'FAIL', '- Loaded value:', loadedValue);
+
+        // Test counter
+        const counter = new Counter();
+        console.log('Initial counter value:', counter.getValue());
+
+        counter.increment();
+        console.log('After increment:', counter.getValue());
+
+        counter.decrement();
+        console.log('After decrement:', counter.getValue());
+
+        counter.reset();
+        console.log('After reset:', counter.getValue());
+
+        console.log('All module tests completed successfully!');
+    </script>
+</body>
+</html>
