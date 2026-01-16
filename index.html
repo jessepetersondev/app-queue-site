@@ -370,7 +370,7 @@
         
         .screenshot-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 32px;
         }
         
@@ -471,6 +471,51 @@
             font-weight: 600;
         }
         
+        /* Coming Soon Section */
+        .coming-soon {
+            padding: 80px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .coming-soon-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .coming-soon-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--accent-purple);
+        }
+        
+        .coming-soon-card p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .coming-soon-features {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .coming-soon-features span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        .coming-soon-features span::before {
+            content: '🔮';
+        }
+        
         /* CTA Section */
         .cta {
             padding: 100px 24px;
@@ -556,6 +601,12 @@
                 max-width: 300px;
                 justify-content: center;
             }
+            
+            .coming-soon-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
         }
     </style>
 </head>
@@ -594,13 +645,12 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="dot"></span>
-                Now available for developers
+                v1.0.0 — Now available
             </div>
             <h1>Turn App Ideas into<br><span class="gradient">Working Applications</span></h1>
             <p class="hero-description">
-                App Queue is an AI-powered development pipeline that transforms your markdown app ideas 
-                into fully implemented applications using Claude Code. Automated planning, implementation, 
-                and deployment—all hands-free.
+                App Queue is a visual dashboard for building apps with Claude Code. Write your idea in markdown, 
+                click to plan, click to build. Manage your entire development pipeline in one place.
             </p>
             <div class="hero-buttons">
                 <a href="https://gumroad.com/l/app-queue" class="btn btn-primary">
@@ -625,38 +675,38 @@
     <section class="features" id="features">
         <div class="section-header">
             <h2>Everything You Need to Ship Faster</h2>
-            <p>App Queue handles the entire development pipeline so you can focus on what matters—your ideas.</p>
+            <p>App Queue handles the development pipeline so you can focus on what matters—your ideas.</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">📝</div>
                 <h3>Markdown to App</h3>
-                <p>Write your app idea as a simple markdown file. App Queue handles the rest—parsing requirements, planning architecture, and implementing features.</p>
+                <p>Write your app idea as a simple markdown file. Drop it in the ideas folder and App Queue handles the rest—parsing requirements, planning architecture, and implementing features.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>Autonomous Mode</h3>
-                <p>Enable autonomous mode and watch your ideas become reality. Planning and implementation run automatically without any manual intervention.</p>
+                <div class="feature-icon">📖</div>
+                <h3>Stories Mode</h3>
+                <p>Break large apps into manageable user stories. Each story is implemented one at a time, giving you checkpoints and the ability to test progress incrementally.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📊</div>
                 <h3>Real-time Dashboard</h3>
-                <p>Beautiful web dashboard shows your entire pipeline. Track progress, view plans, launch apps, and manage your queue with ease.</p>
+                <p>Beautiful web dashboard shows your entire pipeline. Track progress with live logs, view plans, launch completed apps, and manage your queue with ease.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
                 <h3>Claude Code Integration</h3>
-                <p>Powered by Claude Code for intelligent planning and implementation. Your apps are built with modern best practices and clean code.</p>
+                <p>Powered by Claude Code for intelligent planning and implementation. Uses official CLI best practices with -p and --append-system-prompt flags.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🔄</div>
-                <h3>GitHub Sync</h3>
-                <p>Automatically sync with your GitHub repository. Push completed apps to branches and track everything in version control.</p>
+                <h3>GitHub Integration</h3>
+                <p>Sync app ideas from a GitHub repo automatically. Push completed apps to their own branches—ready for Vercel or Netlify auto-deployment.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🎨</div>
                 <h3>Customizable Prompts</h3>
-                <p>Fine-tune the planning and implementation prompts to match your coding style and project requirements.</p>
+                <p>Fine-tune the planning, stories, and implementation prompts in Settings. Match your coding style and project requirements.</p>
             </div>
         </div>
     </section>
@@ -672,28 +722,28 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <h3>Write Your Idea</h3>
-                    <p>Create a markdown file describing your app. Include features, tech stack preferences, and any specific requirements. Drop it in the ideas folder.</p>
+                    <p>Create a markdown file describing your app. Include features, tech stack preferences, and any specific requirements. Drop it in ~/app-ideas/ideas/.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>Automatic Planning</h3>
-                    <p>App Queue uses Claude to analyze your idea and create a comprehensive implementation plan—system architecture, file structure, dependencies, and step-by-step tasks.</p>
+                    <h3>One-Click Planning</h3>
+                    <p>Click "Run Planning" and watch Claude analyze your idea. It creates a comprehensive IMPLEMENTATION_PLAN.md with architecture, file structure, and step-by-step tasks.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>AI Implementation</h3>
-                    <p>Claude Code takes the plan and builds your entire application autonomously. All files, components, styling, and functionality—created automatically.</p>
+                    <h3>Build with Stories</h3>
+                    <p>Generate user stories from your plan, then implement them one by one. Or skip stories and run full implementation in one shot—your choice.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>Launch & Iterate</h3>
-                    <p>Your app is ready! Launch it directly from the dashboard, push to GitHub, or continue iterating. Rinse and repeat for your next idea.</p>
+                    <h3>Launch & Push</h3>
+                    <p>Your app is ready! Launch it directly from the dashboard to test, then push to GitHub with one click. Each app gets its own branch.</p>
                 </div>
             </div>
         </div>
@@ -734,19 +784,19 @@
     <section class="pricing" id="pricing">
         <div class="section-header">
             <h2>Simple Pricing</h2>
-            <p>One-time purchase. Lifetime updates.</p>
+            <p>One-time purchase. Free updates for v1.x.</p>
         </div>
         <div class="pricing-card">
-            <h3>App Queue</h3>
+            <h3>App Queue v1.0</h3>
             <div class="price">$29 <span>one-time</span></div>
             <ul class="pricing-features">
                 <li>Full source code access</li>
-                <li>Autonomous mode</li>
-                <li>Real-time dashboard</li>
-                <li>GitHub integration</li>
+                <li>Visual dashboard with real-time progress</li>
+                <li>Stories mode for incremental builds</li>
+                <li>GitHub sync (ideas in) & push (apps out)</li>
                 <li>Customizable prompts</li>
-                <li>Lifetime updates</li>
-                <li>No subscription required</li>
+                <li>One-click app launcher</li>
+                <li>Free updates for all v1.x releases</li>
             </ul>
             <a href="https://gumroad.com/l/app-queue" class="btn btn-primary" style="width: 100%; justify-content: center;">
                 Get App Queue Now
@@ -754,11 +804,24 @@
         </div>
     </section>
 
+    <!-- Coming Soon -->
+    <section class="coming-soon">
+        <div class="coming-soon-card">
+            <h3>🚀 Coming in v2.0</h3>
+            <p>We're already working on the next major release with powerful new features.</p>
+            <div class="coming-soon-features">
+                <span>Autonomous Mode</span>
+                <span>Auto-push on completion</span>
+                <span>Multiple AI backends</span>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section class="cta">
         <div class="cta-content">
             <h2>Ready to Ship Faster?</h2>
-            <p>Stop manually building every app. Let AI handle the heavy lifting while you focus on the ideas that matter.</p>
+            <p>Stop manually building every app. Let Claude Code handle the heavy lifting while you focus on the ideas that matter.</p>
             <a href="https://gumroad.com/l/app-queue" class="btn btn-primary">
                 Get App Queue — $29
             </a>
@@ -768,6 +831,7 @@
     <!-- Footer -->
     <footer>
         <p>© 2025 App Queue. Built for developers who ship.</p>
+        <p style="margin-top: 8px;"><a href="https://github.com/YOUR_USERNAME/app-queue">GitHub</a> · Requires <a href="https://docs.anthropic.com/claude-code">Claude Code CLI</a></p>
     </footer>
 </body>
 </html>
